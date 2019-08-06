@@ -1,0 +1,22 @@
+.box {
+	height: 100vh;
+}
+#side {
+	background-color: #f8f8f8;
+	border-right: #e7e7e7 1px solid;
+	word-break: break-all;
+}
+#logo {
+	height: 20px;
+	margin-right: 10px;
+}
+#body {
+	opacity: 0;
+}
+.content {
+	padding-left: 2em;
+	padding-right: 2em;
+}
+img {
+	max-width: 100%;
+}

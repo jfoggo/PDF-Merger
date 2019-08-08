@@ -9,7 +9,7 @@ function init(){
 	$(".navbar-right li").click(function(event){
 		$(".navbar-right li").removeClass("active");
 		$(event.target).closest("li").addClass("active");
-		$(".navbar-toggle:visible").click();
+		$(".navbar-toggle:visible[aria-expanded='true']").click();
 		$(".content, .side").addClass("hidden");
 		var id = $(event.target).closest("li").children("a").attr("href");
 		$(id+"-main, "+id+"-side").removeClass("hidden");

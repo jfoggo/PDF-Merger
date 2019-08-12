@@ -279,6 +279,6 @@ function init(){
 	$("#body").animate({opacity:1},500);
 
 	// Paul startet seine INIT
-	//merger_init();
+	init_merger();
 }
 $(document).ready(init);

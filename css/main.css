@@ -40,7 +40,7 @@ img {
 	height: 100px;
 	display: none;
 }
-#select-canvas {
+#select-canvas, #merge-canvas {
 	width: 100%;
 	height: 90vh;
 	min-height: 300px;

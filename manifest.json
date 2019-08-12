@@ -1,0 +1,9 @@
+{
+    "name" : "PDF-Merger",
+    "short_name" : "PDF-Merger",
+    "display" : "standalone",
+    "background_color" : "black",
+    "icons" : [
+        {"src": "img/logo.png", "sizes": "48x48 72x72 96x96 128x128 256x256", "type": "image/png"}
+    ]
+}

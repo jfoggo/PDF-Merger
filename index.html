@@ -4,11 +4,15 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
 		<title>PDF Merger</title>
-		<link rel="icon" href="logo.png">
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<!-- WebApp einbinden -->
+		<link rel="manifest" href="manifest.json">
+		<!-- icon für browser und WebApp einbinden -->
+		<link rel="icon" href="img/logo.png">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">	
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<script src="js/jquery.min.js"></script>
-		<script src="js/pdf.min.js"></script>
+		<!-- PDF.js einbinden -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<script src="js/main.js"></script>
 	</head>
@@ -45,15 +49,27 @@
 						<div id="home-side" class="container-fluid side">
 							<div class="row">
 								<div class="col-xs-12">
-									<h2 id="side-heading">Home</h2>
+									<h2 class="side-heading">Home</h2>
 									<hr style="margin-top:0;border-width:2px"/>
+									<h4 style="font-size:2.5vh">Actions:</h4>
+									<ul>
+										<li>
+											<button class="btn btn-sm btn-default" onclick="$('li a[href=\'#upload\']').click()">Upload</button>
+										</li>
+										<li>
+											<button class="btn btn-sm btn-default" onclick="$('li a[href=\'#select\']').click()">Select</button>
+										</li>
+										<li>
+											<button class="btn btn-sm btn-default" onclick="$('li a[href=\'#merge\']').click()">Merge</button>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
 						<div id="upload-side" class="container-fluid side hidden">
 							<div class="row">
 								<div class="col-xs-12">
-									<h2 id="side-heading">Upload</h2>
+									<h2 class="side-heading">Upload</h2>
 									<hr style="margin-top:0;border-width:2px"/>
 								</div>
 							</div>
@@ -62,17 +78,23 @@
 						<div id="select-side" class="container-fluid side hidden">
 							<div class="row">
 								<div class="col-xs-12">
-									<h2 id="side-heading">Select</h2>
+									<h2 class="side-heading">Select</h2>
 									<hr style="margin-top:0;border-width:2px"/>
 								</div>
 							</div>
 							<!-- TODO: LIST OF PDF FILES -->
+							<div id="select-side-img">
+								
+							</div>
 							<!-- TODO: LIST OF SNIPPETS -->
+							<div id="select-side-snippets">
+								
+							</div>
 						</div>
 						<div id="merge-side" class="container-fluid side hidden">
 							<div class="row">
 								<div class="col-xs-12">
-									<h2 id="side-heading">Merge</h2>
+									<h2 class="side-heading">Merge</h2>
 									<hr style="margin-top:0;border-width:2px"/>
 								</div>
 							</div>
@@ -94,18 +116,48 @@
 							</div>
 						</div>
 						<div id="upload-main" class="content container-fluid hidden">
-							
-							<!-- TODO: JEFFREYS PART -->
-						
+							<!-- TODO: UPLOAD (JEFFREYS PART) -->
+							<div class="row">
+								<div class="col-xs-2"></div>
+								<div class="col-xs-8 jumbotron container" style="margin-top:5vh">
+									<div class="row">
+										<div class="col-xs-12">
+											<h2 class="text-center">Upload new files here:</h2>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12 text-center">
+											<button class="btn btn-lg btn-primary" onclick="$('#file-upload').click()">new <span class="glyphicon glyphicon-plus"></span></button>
+											<input id="file-upload" multiple="true" type="file" accept="image/*,.pdf" class="hidden" onchange="add_new_file()">
+											<canvas id="upload-canvas" width="100" height="100" style="background:red;"></canvas>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-2"></div>
+							</div>
 						</div>
-						<div id="select-main" class="content container-fluid hidden">
-						
-							<!-- TODO: JULIANS PART -->
-						
+						<div id="select-main" class="content container-fluid hidden text-center" onmousemove="show_select_menu()" onmouseover="show_select_menu()">
+							<!-- TODO: SELECT (JULIANS PART) -->
+							<canvas id="select-canvas" width="300" height="200"></canvas>
+							<div id="select-tools" class="hidden container">
+								<div class="row">
+									<div class="col-xs-12">
+										<button class="btn btn-sm btn-default">
+											<span class="glyphicon glyphicon-backward"></span>
+										</button>
+										<button class="btn btn-lg btn-info btn-default">
+											<span class="glyphicon glyphicon-scissors"></span>
+										</button>
+										<button class="btn btn-sm btn-default">
+											<span class="glyphicon glyphicon-forward"></span>
+										</button>
+									</div>
+								</div>
+							</div>
 						</div>
 						<div id="merge-main" class="content container-fluid hidden">
 						
-							<!-- TODO: PAULS PART -->
+							<!-- TODO: MERGE (PAULS PART) -->
 					
 						</div>
 					</div>

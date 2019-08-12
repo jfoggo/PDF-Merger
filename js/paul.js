@@ -5,7 +5,7 @@ var snipElem;
 function merger_init(){
 
   console.log('joo');
-
+  
   snipElem = $('#snip1')[0];
   // use displacejs to add draging functionality
   displace = displacejs(snipElem, {

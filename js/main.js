@@ -153,6 +153,7 @@ function add_new_file(){
 					var r = random(0,10000);
 					$("#upload-side, #select-side-img").append("<div><label for='img"+r+"'>"+file.name+"</div><img id='"+r+"' src='"+event.target.result+"' class='upload-img'>");
 					$("#select-side-img img:last").click(function(event){
+						$("#select-side select").val("Files");
 						console.log("clicked: ",event);
 						draw_img_on_canvas($(event.target).closest("img")[0],$("#select-canvas")[0]);
 					});
@@ -211,6 +212,7 @@ function convert_pdf_to_img(pdf,canvas,file){
 				draw_img_on_canvas($(event.target).closest("img")[0],$("#select-canvas")[0]);
 			});
 			$("#upload-side img:last").click(function(event){
+				$("#select-side select").val("Files");
 				$("li a[href='#select']").click();
 				var c = $(event.target).closest("img").attr("class").split(" ")[0];
 				$("#select-side-img ."+c).click();
@@ -230,6 +232,17 @@ function show_select_menu(){
 	selectTimeout = setTimeout(function(){
 		$("#select-tools").addClass("hidden");
 	},2*1000);
+}
+
+function show_side_div(select){
+	if ($(select).val() == "Files"){
+		$("#select-side-img").removeClass("hidden");
+		$("#select-side-snippets").addClass("hidden");
+	}
+	else {
+		$("#select-side-img").addClass("hidden");
+		$("#select-side-snippets").removeClass("hidden");
+	}
 }
 
 // ********************************* MERGE SNIPPETS CODE ***************************************** \\
@@ -265,6 +278,7 @@ function init(){
 	// Fade in effect
 	$("#body").animate({opacity:1},500);
 
-	merger_init();
+	// Paul startet seine INIT
+	//merger_init();
 }
 $(document).ready(init);

@@ -14,8 +14,8 @@
 		<!-- PDF.js einbinden -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.0.943/pdf.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
-		<script src="js/displace.min.js"></script>
-		<script src="js/paul.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 	<body>
@@ -81,7 +81,7 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<h2 class="side-heading">Select</h2>
-									<select class="form-control" onchange="$('#select-side-img, #select-side-snippets').toggleClass('hidden')">
+									<select class="form-control" onchange="show_side_div(this)">
 										<option selected>Files</option>
 										<option>Snippets</option>
 									</select>

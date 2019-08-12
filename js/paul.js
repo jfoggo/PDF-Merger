@@ -29,6 +29,7 @@ function merger_init(){
   const resizer = document.createElement('div');
   resizer.className = 'resizeHandle';
   snipElem.appendChild(resizer);
+  console.log(startResize);
   resizer.addEventListener('mousedown', startResize, false);
 
 }
@@ -50,6 +51,7 @@ function startResize(e) {
   window.addEventListener('mousemove', doResize, false);
   window.addEventListener('mouseup', stopResize, false);
 }
+
 function doResize(e) {
   const snip = {width:554,height:213};
   const maxWidth = $('#workspace').offsetWidth - snipElem.offsetLeft;
@@ -65,8 +67,8 @@ function doResize(e) {
   snipElem.style.width =  w+5 + 'px';
   snipElem.style.height = h+5 + 'px';
 }
-function stopResize(e) {
 
+function stopResize(e) {
   window.removeEventListener('mousemove', doResize, false);
   window.removeEventListener('mouseup', stopResize, false);
   displace.reinit();

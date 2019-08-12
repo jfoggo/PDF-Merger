@@ -80,7 +80,7 @@ height: 2000px;
 width:554px; height:213px;
 }
 #snip1 .dragHandle {
-	background-image: url(snip1.png);
+	background-image: url(/img/snip1.png);
 }
 
 .snip{

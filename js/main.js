@@ -147,7 +147,7 @@ function add_new_file(){
 					});
 				};
 				fileReader.readAsArrayBuffer(file);
-			}	
+			}
 			else {								// Handle Images
 				fileReader.onload = function(event){
 					$("#upload-side, #select-side-img").append("<img src='"+event.target.result+"' class='upload-img'>");
@@ -170,7 +170,7 @@ function draw_img_on_canvas(img,canvas){
 	cHeight = $(canvas).innerHeight();
 	console.log("I: ",iWidth," ",iHeight);
 	console.log("C: ",cWidth," ",cHeight);
-	
+
 	if (iWidth < iHeight){
 		canvas.width = iWidth;
 		canvas.height = iHeight;
@@ -263,5 +263,7 @@ function init(){
 	memory.canvas.merge = $("#merge-canvas")[0];
 	// Fade in effect
 	$("#body").animate({opacity:1},500);
+
+	merger_init();
 }
 $(document).ready(init);

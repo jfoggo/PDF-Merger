@@ -1,8 +1,37 @@
-console.log('joo');
-const $ = x=>document.querySelector(x);
 
-const snipElem = document.querySelector('#snip1');
-const infoElem = document.querySelector('#info')
+const LINE_SPACING = 10;
+var snipElem;
+
+function merger_init(){
+
+  console.log('joo');
+
+  snipElem = $('#snip1')[0];
+  // use displacejs to add draging functionality
+  displace = displacejs(snipElem, {
+      constrain: true,
+      relativeTo: document.querySelector('#workspace'),
+      handle: snipElem.querySelector('.dragHandle'),
+      onMouseDown: startDraging,
+      onTouchStart: startDraging,
+      onMouseUp: stopDraging,
+      onTouchStop: stopDraging,
+      customMove(el, x, y){
+        $('#info').html([x,y]+[]);
+        const left = Math.round(x / LINE_SPACING) * LINE_SPACING;
+    		const top = Math.round(y / LINE_SPACING) * LINE_SPACING;
+    		el.style.left = displace.data.xClamp(left) + 'px';
+    		el.style.top = displace.data.yClamp(top) + 'px';
+    	}
+  });
+
+  // init rezizer
+  const resizer = document.createElement('div');
+  resizer.className = 'resizeHandle';
+  snipElem.appendChild(resizer);
+  resizer.addEventListener('mousedown', startResize, false);
+
+}
 
 // Draging functions
 function startDraging(el){
@@ -12,33 +41,10 @@ function stopDraging(el){
 	el.className = el.className.replace(/\s*active/g, '');
 }
 
-const LINE_SPACING = 10;
 
-// use displacejs to add draging functionality
-displace = displacejs(snipElem, {
-    constrain: true,
-    relativeTo: document.querySelector('#workspace'),
-    handle: snipElem.querySelector('.dragHandle'),
-    onMouseDown: startDraging,
-    onTouchStart: startDraging,
-    onMouseUp: stopDraging,
-    onTouchStop: stopDraging,
-    customMove(el, x, y){
-      infoElem.innerHTML= [x,y]+[];
-      const left = Math.round(x / LINE_SPACING) * LINE_SPACING;
-  		const top = Math.round(y / LINE_SPACING) * LINE_SPACING;
-  		el.style.left = displace.data.xClamp(left) + 'px';
-  		el.style.top = displace.data.yClamp(top) + 'px';
-  	}
-});
 
 // #########################################################
 // Resizer
-
-const resizer = document.createElement('div');
-resizer.className = 'resizeHandle';
-snipElem.appendChild(resizer);
-resizer.addEventListener('mousedown', startResize, false);
 
 function startResize(e) {
   window.addEventListener('mousemove', doResize, false);

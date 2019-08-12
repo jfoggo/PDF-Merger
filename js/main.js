@@ -19,7 +19,7 @@ var memory = {
 	}
 };
 var selectTimeout;
-
+var last;
 function random(min,max){
 	return Math.floor(Math.random()*(max-min+1))+min;
 }
@@ -134,7 +134,7 @@ function add_new_file(){
 	var input = $("#file-upload")[0];
 	if (input.files.length > 0){
 		for (var i=0;i<input.files.length;i++){
-			var file = input.files[i];
+			let file = input.files[i];
 			console.log("File: ",file);
 			var fileReader = new FileReader();
 			if (file.name.endsWith(".pdf")){	// Handle PDF's
@@ -143,14 +143,15 @@ function add_new_file(){
 					pdfjsLib.getDocument(typedarray).then(function(pdf){
 						console.log("TODO: ",pdf);
 						pdfFile = pdf;
-						convert_pdf_to_img(pdf,document.querySelector("#upload-canvas"));
+						convert_pdf_to_img(pdf,document.querySelector("#upload-canvas"),file);
 					});
 				};
 				fileReader.readAsArrayBuffer(file);
 			}	
 			else {								// Handle Images
 				fileReader.onload = function(event){
-					$("#upload-side, #select-side-img").append("<img src='"+event.target.result+"' class='upload-img'>");
+					var r = random(0,10000);
+					$("#upload-side, #select-side-img").append("<div><label for='img"+r+"'>"+file.name+"</div><img id='"+r+"' src='"+event.target.result+"' class='upload-img'>");
 					$("#select-side-img img:last").click(function(event){
 						console.log("clicked: ",event);
 						draw_img_on_canvas($(event.target).closest("img")[0],$("#select-canvas")[0]);
@@ -189,7 +190,7 @@ function draw_img_on_canvas(img,canvas){
 	}
 }
 
-function convert_pdf_to_img(pdf,canvas){
+function convert_pdf_to_img(pdf,canvas,file){
 	// render pdf on hidden canvas
 	canvas = $("<canvas class='useless hidden'></canvas>");
 	$("body").append(canvas);
@@ -204,7 +205,7 @@ function convert_pdf_to_img(pdf,canvas){
 			var imgData = canvas.toDataURL("image/jpeg", 1.0);
 			// Append image to side list
 			var id = random(0,10000);
-			$("#upload-side, #select-side-img").append("<img src='"+imgData+"' class='"+id+" upload-img'>");
+			$("#upload-side, #select-side-img").append("<label for='img"+id+"'>"+file.name+"</div><img id='"+id+"' src='"+imgData+"' class='"+id+" upload-img'>");
 			$("#select-side-img img:last").click(function(event){
 				//console.log("clicked: ",event);
 				draw_img_on_canvas($(event.target).closest("img")[0],$("#select-canvas")[0]);

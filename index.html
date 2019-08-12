@@ -79,6 +79,10 @@
 							<div class="row">
 								<div class="col-xs-12">
 									<h2 class="side-heading">Select</h2>
+									<select class="form-control" onchange="$('#select-side-img, #select-side-snippets').toggleClass('hidden')">
+										<option selected>Files</option>
+										<option>Snippets</option>
+									</select>
 									<hr style="margin-top:0;border-width:2px"/>
 								</div>
 							</div>
@@ -87,7 +91,7 @@
 								
 							</div>
 							<!-- TODO: LIST OF SNIPPETS -->
-							<div id="select-side-snippets">
+							<div id="select-side-snippets" class="hidden">
 								
 							</div>
 						</div>
@@ -112,7 +116,7 @@
 							</div>
 							<div class="row text-center">
 								<hr style="opacity:0"/>
-								<button class="btn btn-lg btn-primary" onclick="$(`li a[href='#upload']`).click()">Get Started <span class="glyphicon glyphicon-ok"></span></button>
+								<button class="btn btn-sm btn-primary" onclick="$(`li a[href='#upload']`).click()">Get Started <span class="glyphicon glyphicon-ok"></span></button>
 							</div>
 						</div>
 						<div id="upload-main" class="content container-fluid hidden">

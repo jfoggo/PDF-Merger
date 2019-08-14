@@ -14,6 +14,10 @@
 #body {
 	opacity: 0;
 }
+#main {
+  overflow: scroll;
+  height: 90vh;
+}
 .content {
 	padding-left: 2em;
 	padding-right: 2em;
@@ -62,53 +66,27 @@ canvas {
 }
 
 /*  paul: drag and resize snippets  */
-#info{
-position: absolute;
-right:10px;
-top: 10px;
-}
-
-#workspace{
-position: relative !important;
-left:2%; top:50px;
-background: #666;
-width: 800px;
-height: 2000px;
-}
-
-#snip1{
-width:554px; height:213px;
-}
-#snip1 .dragHandle {
-	background-image: url(../img/snip1.png);
-}
-
-.snip{
+#mouse_coords{
 	position: absolute;
-	width: 100px;
-	height: 100px;
-	user-select: none;
-	cursor: move;
-	z-index: 5;
-	background: rgb(0, 123, 255);
-	transition: transform 0.15s ease-out 0s, background 0.15s ease-out 0s;
+	right:10px;
+	top: 10px;
 }
-.snip.active {
-	/*transform: scale(1.2);*/
-	opacity: 0.8;
+#merge-viewport {
+    position: absolute;
+		background: #666;
+    width: 1000px;
+		height: 750px;
+    left: 0;
+    top: 0;
+		zoom: 1;
+		transform: scale(1);
+		transform-origin: 0 0;
 }
-.snip .dragHandle {
-	width: 100%;
-	height: 100%;
-	background-size: contain;
+#merge-viewport img.snippet{
+	position: absolute !important;
 }
-
-.snip .resizeHandle {
-width: 10px;
-height: 10px;
-background: red;
-position: absolute;
-right: 0px;
-bottom: 0px;
-cursor: se-resize;
+button#merge-addpage{
+	position: fixed;
+	bottom: 50px;
+	right: 50px;
 }

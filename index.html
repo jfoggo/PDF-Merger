@@ -20,7 +20,7 @@
 		<script src="js/main.js"></script>
 	</head>
 	<body>
-		<!-- WRAPPER BOX -->
+	<!-- WRAPPER BOX -->
 		<div id="box">
 			<!-- NAVBAR CONTENT -->
 			<nav id="head" class="navbar navbar-default" style="margin-bottom:0px;">
@@ -129,7 +129,7 @@
 							</div>
 						</div>
 						<div id="upload-main" class="content container-fluid hidden">
-							<!-- TODO: UPLOAD (JEFFREYS PART) -->
+							<!-- TODO: UPLOAD (JEFFREYS PART, der natürlich auch von Jeffrey erledigt wurde) -->
 							<div class="row">
 								<div class="col-xs-2"></div>
 								<div class="col-xs-8 jumbotron container" style="margin-top:5vh">
@@ -150,7 +150,7 @@
 							</div>
 						</div>
 						<div id="select-main" class="content container-fluid hidden text-center" onmousemove="show_select_menu()" onmouseover="show_select_menu()">
-							<!-- TODO: SELECT (JULIANS PART) -->
+							<!-- TODO: SELECT (JULIANS PART, der natürlich noch nicht fertig ist, da er lieber Code von anderen übernimmt) -->
 							<canvas id="select-canvas" width="300" height="200"></canvas>
 							<div id="select-tools" class="hidden container">
 								<div class="row">
@@ -180,5 +180,12 @@
 				</div>
 			</div>
 		</div>
+		<script>
+				if('serviceWorker' in navigator) {
+					navigator.serviceWorker
+									 .register('/sw.js')
+									 .then(function() { console.log("Service Worker Registered"); });
+				}
+		</script>
 	</body>
 </html>

@@ -7,9 +7,6 @@ self.addEventListener('install', function(e) {
      return cache.addAll([
        '/',
        '/index.html',
-       '/index.html#upload',
-       '/index.html#select',
-       '/index.html#merge',
        '/cache-polyfill.js',
        '/css/bootstrap.min.css',
        '/css/bootstrap.min.css.map',

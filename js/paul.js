@@ -30,13 +30,14 @@ class VIEWPORT{
 		let id = this.snip_id++;
 		let that = this;
 		let offset = this.view.offset();
+		let coords = this.getCoords(evt);
 
 		ui.draggable.clone()
 		.attr('class','snippet')
 		.attr('id','snip'+id)
 		.css({
-			left: ui.position.left - offset.left,  // TODO: fix drop position !! (zoom/scale)
-			top: ui.position.top - offset.top,
+			left: coords.X - pointerX,  // TODO: fix drop position !! (zoom/scale)
+			top: coords.Y - pointerY, //ui.position.top - offset.top,
 			width: ui.draggable.prop('naturalWidth'),
 			height: ui.draggable.prop('naturalHeight'),
 		})
@@ -45,20 +46,21 @@ class VIEWPORT{
 			// SRC: https://stackoverflow.com/questions/2930092/jquery-draggable-with-zoom-problem
 			cursor: "move",
 		  start : function(evt, ui) {
-				that.getZoom();
-		    pointerY = (evt.pageY - view.offset().top) / zoom - parseInt($(evt.target).css('top'));
-		    pointerX = (evt.pageX - view.offset().left) / zoom - parseInt($(evt.target).css('left'));
+				let coords = that.getCoords(evt);
+		    pointerY = coords.Y - parseInt($(evt.target).css('top'));
+		    pointerX = coords.X - parseInt($(evt.target).css('left'));
 				$(evt.target).detach().appendTo(view); // foreground snippet
 		  },
 		  drag : function(evt, ui) {
+				let coords = that.getCoords(evt);
 		    var viewTop = view.offset().top;
 		    var viewLeft = view.offset().left;
 		    var viewHeight = view.height();
 		    var viewWidth = view.width();
 
 		    // Fix for zoom
-		    ui.position.top = Math.round((evt.pageY - viewTop) / zoom - pointerY);
-		    ui.position.left = Math.round((evt.pageX - viewLeft) / zoom - pointerX);
+		    ui.position.top = Math.round(coords.Y - pointerY);
+		    ui.position.left = Math.round(coords.X - pointerX);
 
 		    // TODO: Check if element is outside view
 		    if (ui.position.left < 0) ui.position.left = 0;
@@ -72,6 +74,12 @@ class VIEWPORT{
 		  }
 		});
 	}
+	getCoords(evt){
+		return {
+			X: Math.round((evt.pageX - this.view.offset().left) / this.zoom),
+			Y: Math.round((evt.pageY - this.view.offset().top) / this.zoom)
+		};
+	}
 
 	renderOnCanvas(){
 		//TODO
@@ -79,6 +87,10 @@ class VIEWPORT{
 	toPDF(){
 		//TODO
 	}
+}
+
+function viewCoords(evt){
+
 }
 
 //########################################################################
@@ -99,6 +111,9 @@ function init_merger(){
 		revert: "invalid",
 		start: (evt,ui)=>{
 			ui.helper.width(ui.helper.prop("naturalWidth")*merger.getZoom());
+			pointerY = (evt.pageY - ui.offset.top)/merger.zoom;
+			pointerX = (evt.pageX - ui.offset.left)/merger.zoom;
+			console.log(pointerX,pointerY);
 		}
 	});
 
@@ -112,8 +127,9 @@ function init_merger(){
 	$(window).resize(()=>merger.fitZoomOnWidth());
 
 	// print mouse coords for debugging
-	$('#merge-viewport').mousemove(e => {
+	$('#merge-viewport').mousemove(evt => {
 		var o = $('#merge-viewport').offset(); // TODO: zoom ???
-		$('#mouse_coords').html([]+[e.clientX-o.left,e.clientY-o.top]+'<br>'+merger.zoom);
+		let coords = merger.getCoords(evt);
+		$('#mouse_coords').html([]+[coords.X,coords.Y]);
 	});
 }
